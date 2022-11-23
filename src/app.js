@@ -24,19 +24,19 @@ app.get(
 );
 
 app.get(
-  '/users/:id',
+  '/users/:uuid',
   verifyUserExistsMiddleware,
   verifyAuthMiddleware,
   verifyIsAdminMiddleware,
   getUserByIdController,
 );
 
-app.get('/users/profile', verifyAuthMiddleware, getUserProfileController);
+app.get('users/profile', verifyAuthMiddleware, getUserProfileController);
 
 app.post('/users', verifyEmailMiddleware, createUserController);
 
 app.patch(
-  '/users/:id',
+  '/users/:uuid',
   verifyUserExistsMiddleware,
   verifyAuthMiddleware,
   verifyEmailMiddleware,
@@ -44,7 +44,7 @@ app.patch(
 );
 
 app.delete(
-  '/users/:id',
+  '/users/:uuid',
   verifyAuthMiddleware,
   verifyUserExistsMiddleware,
   deleteUserController,
