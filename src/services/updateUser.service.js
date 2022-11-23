@@ -9,6 +9,10 @@ export const updateUserService = (req) => {
     return [404, { message: 'User not found' }];
   }
 
+  if (req.body.hasOwnProperty('isAdm')) {
+    return [401, { message: 'Unable to change user type' }];
+  }
+
   users[userIndex] = {
     ...users[userIndex],
     updatedOn: moment().format('LLLL'),
