@@ -1,56 +1,9 @@
 import express from 'express';
-import {
-  createUserController,
-  deleteUserController,
-  getUserByIdController,
-  getUserProfileController,
-  getUsersController,
-  updateUserController,
-  userLoginController,
-} from './controllers/controller';
-import { verifyAuthMiddleware } from './middlewares/verifyAuth';
-import { verifyEmailMiddleware } from './middlewares/verifyEmail';
-import { verifyIsAdminMiddleware } from './middlewares/verifyIsAdmin';
-import { verifyUserExistsMiddleware } from './middlewares/verifyUserExists';
+import { router } from './routes/userRoutes';
 
 const app = express();
 app.use(express.json());
-
-app.get(
-  '/users',
-  verifyAuthMiddleware,
-  verifyIsAdminMiddleware,
-  getUsersController,
-);
-
-app.get(
-  '/users/:uuid',
-  verifyUserExistsMiddleware,
-  verifyAuthMiddleware,
-  verifyIsAdminMiddleware,
-  getUserByIdController,
-);
-
-app.get('users/profile', verifyAuthMiddleware, getUserProfileController);
-
-app.post('/users', verifyEmailMiddleware, createUserController);
-
-app.patch(
-  '/users/:uuid',
-  verifyUserExistsMiddleware,
-  verifyAuthMiddleware,
-  verifyEmailMiddleware,
-  updateUserController,
-);
-
-app.delete(
-  '/users/:uuid',
-  verifyAuthMiddleware,
-  verifyUserExistsMiddleware,
-  deleteUserController,
-);
-
-app.post('/login', userLoginController);
+app.use(router);
 
 app.listen(3000, () => console.log('Server started at http://localhost:3000'));
 

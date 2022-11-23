@@ -1,7 +1,9 @@
 import users from '../database';
 
 export const verifyEmailMiddleware = (req, res, next) => {
-  const userIndex = users.findIndex((elem) => elem.email === req.body.email);
+  const { email } = req.body.email;
+
+  const userIndex = users.findIndex((elem) => elem.email === email);
 
   if (userIndex === -1) {
     return next();
