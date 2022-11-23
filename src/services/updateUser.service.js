@@ -19,5 +19,7 @@ export const updateUserService = (req) => {
     ...req.body,
   };
 
-  return [200, users[userIndex]];
+  const { password, ...restUserUpdate } = users[userIndex];
+
+  return [200, restUserUpdate];
 };

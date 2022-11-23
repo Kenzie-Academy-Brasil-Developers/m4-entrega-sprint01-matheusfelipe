@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { getUsersController } from '../controllers/getUsers.controller';
-import { getUserByIdController } from '../controllers/getUserById.controller';
 import { getUserProfileController } from '../controllers/getUserProfile.controller';
 import { createUserController } from '../controllers/createUser.controller';
 import { updateUserController } from '../controllers/updateUser.controller';
@@ -18,13 +17,6 @@ router.get(
   verifyTokenMiddleware,
   verifyIsAdminMiddleware,
   getUsersController,
-);
-
-router.get(
-  '/users/:uuid',
-  verifyTokenMiddleware,
-  verifyIsAdminMiddleware,
-  getUserByIdController,
 );
 
 router.get('/users/profile', verifyTokenMiddleware, getUserProfileController);
